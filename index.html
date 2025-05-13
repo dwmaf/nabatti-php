@@ -61,15 +61,11 @@
 
   .h1-custom::before {
     content: "";
-    /* Menambahkan konten kosong */
-    display: block;
+    /* display: block; */
     /* Menjadikan pseudo-element sebagai block */
     width: 80px;
-    /* Menentukan panjang garis */
     height: 3px;
-    /* Menentukan ketebalan garis */
     background-color: rgb(29, 138, 26);
-    /* Warna garis */
     position: absolute;
     /* Posisi absolut untuk penempatan yang tepat */
     left: 50%;
@@ -105,7 +101,7 @@
   <!-- navbar -->
   <nav class="navbar navbar-expand-lg bg-light shadow">
     <div class="container-fluid d-flex justify-content-between align-items-center px-3 px-sm-5">
-      <a class="navbar-brand m-0" href="#">
+      <a class="navbar-brand m-0" href="./index.html">
         <img src="assets/logo-app.png" alt="" style="height: 40px;" />
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -118,7 +114,7 @@
       <div class="navbar-nav fw-bold poppins">
         <a class="nav-link me-3 scroll-to-section" href="#about">About</a>
         <a class="nav-link me-3 scroll-to-section" href="#services">Product</a>
-        <a class="nav-link me-3 scroll-to-section" href="#visi">Visi</a>
+        <a class="nav-link me-3 scroll-to-section" href="#vision">Visi</a>
       </div>
     </div>
   </nav>
@@ -128,7 +124,7 @@
     <img src="assets/bg-1.png" class="hero-img" alt="Background Image" />
 
     <div
-      class="bg-dark bg-opacity-75 p-3 position-absolute top-50 start-50 translate-middle text-white text-start rounded-4 poppins">
+      class="bg-dark bg-opacity-75 p-3 pb-4 position-absolute top-50 start-50 translate-middle text-white text-start rounded-4 poppins">
       <h6 class="mb-4">Agriculture - Small and Medium Enterpris (SME)</h6>
       <h1 style="font-weight: 800;">Innovation drives sustainability, efficiency,</h1>
       <h1 class="mb-4" style="font-weight: 800;">and lasting value</h1>
@@ -167,12 +163,12 @@
               style="border-radius: 14px;">
               <img src="assets/kustomisasi-mesin.png" style="width: 60px;" alt="">
             </div>
-            <p style="font-weight: bold;" class="text-white">Kustomisasi Mesin Produksi</p>
+            <p style="font-weight: bold;" class="text-white">Production Machine Custome</p>
           </div>
         </div>
       </a>
       <!-- nabatti -->
-      <div class="col-md-4 my-2 d-flex justify-content-center">
+      <a href="#nabatti" class="text-decoration-none col-md-4 my-2 d-flex justify-content-center">
         <div class="card py-3" style="width: 300px;">
           <div
             class="card-body px-5 poppins d-flex flex-column align-items-center justify-content-between gap-3 text-center">
@@ -180,10 +176,10 @@
               style="border-radius: 14px; border: 3px solid rgb(29, 138, 26);">
               <img src="assets/logo-nabatti_-_Copy-removebg-preview.png" style="width: 100px;" alt="">
             </div>
-            <p style="font-weight: bold;">Nabatti</p>
+            <p style="font-weight: bold;" class="text-black">Nabatti</p>
           </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 
@@ -199,7 +195,7 @@
     </p>
   </div>
   <!-- hydrogel -->
-  <h1 class="section h1-custom d-flex justify-content-center mt-5 poppins" style="font-weight: bold; ">Services</h1>
+  <h1 id="services" class="section h1-custom d-flex justify-content-center mt-5 poppins" style="font-weight: bold; ">Services</h1>
   <section id="hydrogel" class="mt-2">
     <div class="container">
       <div class="row">
@@ -219,7 +215,7 @@
     </div>
   </section>
   <!-- end product -->
-  <section id="end-product" class="mt-4">
+  <section id="nabatti" class="section mt-4">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12 mt-4 right-text poppins">
@@ -237,7 +233,7 @@
     </div>
   </section>
   <!-- production machine custome -->
-  <section id="machine-custome" class="mt-4">
+  <section id="machine-custome" class="section mt-4">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12 mt-4 right-text poppins">
@@ -255,7 +251,7 @@
     </div>
   </section>
   <!-- visi misi -->
-  <h1 class="h1-custom section d-flex justify-content-center mb-5 mt-5 poppins" style="font-weight: bold;">Vision</h1>
+  <h1 id="vision" class="h1-custom section d-flex justify-content-center mb-5 mt-5 poppins" style="font-weight: bold;">Vision</h1>
   <div class="text-custom container poppins mt-2">
     <p style="text-align: justify;">Membangun masa depan yang berkelanjutan melalui inovasi berbasis sagu,
       yang mendukung ketahanan pangan, pemberdayaan masyarakat lokal, dan
