@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nabatti</title>
+  <link rel="icon" type="image/png" href="assets/icon-app.png">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+  <style>
+    .poppins {
+      font-family: "Poppins", sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+      margin: 0 !important;
+    }
+
+    body,
+    html {
+      min-height: 100vh;
+    }
+
+    .btn-upload {
+      background-color: #1d8a1a;
+    }
+
+    .btn-upload:hover {
+      background-color: #145e10;
+    }
+
+    .status-card {
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      margin: 20px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* .status-card img {
+      max-width: 100%;
+      border-radius: 10px;
+    } */
+
+    .status-title {
+      font-weight: bold;
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+    .status-description {
+      font-size: 16px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body class="vh-100 d-flex flex-column">
+
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg bg-light shadow">
+    <div class="container-fluid d-flex justify-content-between align-items-center px-3 px-sm-5">
+      <a class="navbar-brand m-0" href="./index.html">
+        <img src="assets/logo-app.png" alt="" style="height: 40px;" />
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse justify-content-end px-3 px-sm-5" id="navbarNavAltMarkup">
+      <div class="navbar-nav fw-bold poppins">
+        <a class="nav-link me-3 scroll-to-section" href="#about">About</a>
+        <a class="nav-link me-3 scroll-to-section" href="#services">Product</a>
+        <a class="nav-link me-3 scroll-to-section" href="#vision">Visi</a>
+        <a class="nav-link me-3 scroll-to-section" href="./demoai.html">Fruitscan</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- splash screen -->
+  <div class="container mt-5 mb-5 d-flex flex-column align-items-center justify-content-center flex-grow-1">
+    <h2 class="poppins">Please Upload Your Fruit Image</h2>
+    <h5 class="poppins" style="color: #a6a6a6;">to detect whether it's ripe or not</h5>
+    <input type="file" id="imageUpload" class="btn btn-upload text-white mt-2" style="max-width: 250px;">
+    <div id="imagePreview" class="mt-4" style="max-width: 250px;"></div>
+    <div id="statusCards" class="mt-5" style="max-width: 300px;"></div>
+  </div>
+
+  <!-- footer -->
+  <footer>
+    <div
+      class="container-fluid text-center d-flex flex-column flex-md-row justify-content-center align-items-center py-3">
+      <img src="assets/logo-app.png" alt="" style="height: 43px;" />
+      <p class="mb-0 poppins">© 2025 Nabatti. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+  <script>
+    // Fungsi untuk memuat model TensorFlow.js
+    async function loadModel2() {
+      const model = await tf.loadGraphModel('model/model_v3/model.json');
+      console.log("model...!!", model)
+    }
+
+    async function loadModel() {
+      // Memuat model TensorFlow.js
+      const model = await tf.loadLayersModel('model/model_v3/model.json');
+      console.log("Model loaded successfully!");
+
+      // Fungsi untuk memproses dan memprediksi gambar
+      document.getElementById('imageUpload').addEventListener('change', async function (e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = async function (event) {
+            const imagePreview = document.getElementById('imagePreview');
+            const imgElement = document.createElement('img');
+            imgElement.src = event.target.result;
+            imgElement.style.maxWidth = "300px";
+            imgElement.style.borderRadius = "10px";
+            imagePreview.innerHTML = ''; // Hapus gambar sebelumnya
+            imagePreview.appendChild(imgElement);
+
+            // Prediksi gambar yang diunggah
+            await predictImage(model, event.target.result);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    // Fungsi untuk memproses gambar dan melakukan prediksi
+    async function predictImage(model, imageData) {
+      const img = new Image();
+      img.src = imageData;
+      img.onload = async function () {
+        const startTime = performance.now();
+        const tensor = tf.browser.fromPixels(img).resizeNearestNeighbor([224, 224]).toFloat().expandDims(0);
+        const prediction = await model.predict(tensor).data();
+        // Akhir pengukuran waktu
+        const endTime = performance.now();  // Akhir waktu prediksi
+
+        // Hitung waktu yang dibutuhkan untuk prediksi
+        const elapsedTime = (endTime - startTime).toFixed(2);  // Waktu dalam milidetik
+        console.log(`Prediksi selesai dalam ${elapsedTime} ms`);
+
+        displayPrediction(prediction);
+      }
+    }
+
+    // Fungsi untuk menampilkan hasil prediksi
+    function displayPrediction(prediction) {
+      // Daftar label kelas
+      const dataset_labels = [
+        'Ripe Apple', 'Ripe Banana', 'Ripe Mango', 'Ripe Orange', 'Ripe Papaya',
+        'Ripe Pomegranate', 'Rotten Apple', 'Rotten Banana', 'Rotten Mango',
+        'Rotten Orange', 'Rotten Papaya', 'Rotten Pomegranate', 'Unripe Apple',
+        'Unripe Banana', 'Unripe Mango', 'Unripe Orange', 'Unripe Papaya',
+        'Unripe Pomegranate'
+      ];
+
+      // Menentukan ID kelas dengan probabilitas tertinggi
+      const predicted_id = prediction.indexOf(Math.max(...prediction));
+      const predicted_label = dataset_labels[predicted_id];
+
+      // Tampilkan prediksi di status card
+      const statusCard = document.createElement('div');
+      statusCard.className = "status-card";
+      statusCard.style.backgroundColor = "#d4edda";  // Hijau (untuk benar)
+      statusCard.innerHTML = `
+      <div class="status-title">Prediksi: ${predicted_label}</div>
+      <div class="status-description">Ini adalah prediksi dari model AI untuk gambar yang diunggah.</div>
+    `;
+      document.getElementById('statusCards').innerHTML = ''; // Hapus status sebelumnya
+      document.getElementById('statusCards').appendChild(statusCard);
+    }
+    loadModel();
+  </script>
+
+
+</body>
+
+</html>
