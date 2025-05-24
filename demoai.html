@@ -118,14 +118,9 @@
 
   <script>
     // Fungsi untuk memuat model TensorFlow.js
-    async function loadModel2() {
-      const model = await tf.loadGraphModel('model/model_v3/model.json');
-      console.log("model...!!", model)
-    }
-
     async function loadModel() {
       // Memuat model TensorFlow.js
-      const model = await tf.loadLayersModel('model/model_v3/model.json');
+      const model = await tf.loadLayersModel('model/model_v4/model.json');
       console.log("Model loaded successfully!");
 
       // Fungsi untuk memproses dan memprediksi gambar
