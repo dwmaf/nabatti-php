@@ -84,9 +84,9 @@
 
     <div class="collapse navbar-collapse justify-content-end px-3 px-sm-5" id="navbarNavAltMarkup">
       <div class="navbar-nav fw-bold poppins">
-        <a class="nav-link me-3 scroll-to-section" href="#about">About</a>
-        <a class="nav-link me-3 scroll-to-section" href="#services">Product</a>
-        <a class="nav-link me-3 scroll-to-section" href="#vision">Visi</a>
+        <a class="nav-link me-3 scroll-to-section" href="./index.html#about">About</a>
+        <a class="nav-link me-3 scroll-to-section" href="./index.html#services">Product</a>
+        <a class="nav-link me-3 scroll-to-section" href="./index.html#vision">Visi</a>
         <a class="nav-link me-3 scroll-to-section" href="./demoai.html">Fruitscan</a>
       </div>
     </div>
@@ -94,8 +94,18 @@
 
   <!-- splash screen -->
   <div class="container mt-5 mb-5 d-flex flex-column align-items-center justify-content-center flex-grow-1">
-    <h2 class="poppins">Please Upload Your Fruit Image</h2>
-    <h5 class="poppins" style="color: #a6a6a6;">to detect whether it's ripe or not</h5>
+    <h2 class="poppins">Upload Your Fruit Image to Detect Its Ripeness!</h2>
+    <h5 class="poppins" style="color: #a6a6a6;">
+      Discover if your fruit is ripe and ready to enjoy! Our AI can accurately analyze and tell you whether your
+      <strong>apple</strong>, <strong>banana</strong>, <strong>dragon fruit</strong>, <strong>grape</strong>,
+      <strong>lemon</strong>,
+      <strong>mango</strong>, <strong>orange</strong>, <strong>papaya</strong>, <strong>pineapple</strong>,
+      <strong>pomegranate</strong>,
+      or <strong>strawberry</strong> is ripe or not.
+    </h5>
+    <h5 class="poppins" style="color: #a6a6a6;">
+      Just upload your fruit image, and let the AI do the rest!
+    </h5>
     <input type="file" id="imageUpload" class="btn btn-upload text-white mt-2" style="max-width: 250px;">
     <div id="imagePreview" class="mt-4" style="max-width: 250px;"></div>
     <div id="statusCards" class="mt-5" style="max-width: 300px;"></div>
@@ -154,7 +164,7 @@
         const prediction = await model.predict(tensor).data();
         // Akhir pengukuran waktu
         console.log(prediction);
-        
+
         const endTime = performance.now();  // Akhir waktu prediksi
 
         // Hitung waktu yang dibutuhkan untuk prediksi
@@ -180,7 +190,7 @@
       const predicted_id = prediction.indexOf(Math.max(...prediction));
       console.log(predicted_id);
       console.log(dataset_labels[17]);
-      
+
       const predicted_label = dataset_labels[predicted_id];
 
       // Tampilkan prediksi di status card
