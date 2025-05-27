@@ -116,7 +116,7 @@
     <div
       class="container-fluid text-center d-flex flex-column flex-md-row justify-content-center align-items-center py-3">
       <img src="assets/logo-app.png" alt="" style="height: 43px;" />
-      <p class="mb-0 poppins">© 2025 Nabatti. All rights reserved.</p>
+      <p class="mb-0 poppins">© <span id="current-year"></span> Nabatti. All rights reserved.</p>
     </div>
   </footer>
 
@@ -180,16 +180,18 @@
       // Daftar label kelas
       const dataset_labels = [
         'Ripe Apple', 'Ripe Banana', 'Ripe Dragon', 'Ripe Grape', 'Ripe Lemon',
-        'Ripe Mango', 'Ripe Orange', 'Ripe Papaya', 'Ripe Pineapple',
-        'Ripe Pomegranate', 'Ripe Strawberry', 'Unripe Apple',
-        'Unripe Banana', 'Unripe Dragon', 'Unripe Grapes', 'Unripe Lemon',
-        'Unripe Mango', 'Unripe Orange', 'Unripe Papaya', 'Unripe Pineapple', 'Unripe Pomegranate', 'Unripe Strawberry'
+        'Ripe Mango', 'Ripe Orange', 'Ripe Papaya', 'Ripe Pineapple', 'Ripe Pomegranate',
+        'Ripe Strawberry', 'Unripe Apple', 'Unripe Banana', 'Unripe Dragon', 'Unripe Grapes',
+        'Unripe Lemon', 'Unripe Mango', 'Unripe Orange', 'Unripe Papaya', 'Unripe Pineapple',
+        'Unripe Pomegranate', 'Unripe Strawberry'
       ];
 
       // Menentukan ID kelas dengan probabilitas tertinggi
       const predicted_id = prediction.indexOf(Math.max(...prediction));
+      const maxPrediction = Math.max(...prediction);
+      console.log(maxPrediction);
+
       console.log(predicted_id);
-      console.log(dataset_labels[17]);
 
       const predicted_label = dataset_labels[predicted_id];
 
@@ -205,6 +207,8 @@
       document.getElementById('statusCards').appendChild(statusCard);
     }
     loadModel();
+    // Mengambil elemen dengan id "current-year"
+    document.getElementById('current-year').textContent = new Date().getFullYear();
   </script>
 
 

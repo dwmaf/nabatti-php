@@ -188,7 +188,7 @@
           </div>
         </div>
       </a>
-      
+
       <!-- nabatti -->
       <a href="#nabatti" class="text-decoration-none col-12 col-md-3 my-2 d-flex justify-content-center">
         <div class="card py-3" style="width: 300px;">
@@ -256,7 +256,7 @@
           </p>
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12 mt-4">
-          <img src="assets/fruitscan-img.PNG" alt="" class="img-fluid rounded-4" />
+          <img src="assets/fruitimg.jpg" alt="" class="img-fluid rounded-4" style="min-width: 260px;" />
         </div>
       </div>
     </div>
@@ -316,7 +316,7 @@
     </div>
   </section>
 
-  
+
   <!-- visi misi -->
   <h1 id="vision" class="h1-custom section d-flex justify-content-center mb-5 mt-5 poppins" style="font-weight: bold;">
     Vision</h1>
@@ -401,9 +401,13 @@
     <div
       class="container-fluid text-center d-flex flex-column flex-md-row justify-content-center align-items-center py-3">
       <img src="assets/logo-app.png" alt="" style="height: 43px;" />
-      <p class="mb-0 poppins">© 2025 Nabatti. All rights reserved.</p>
+      <p class="mb-0 poppins">© <span id="current-year"></span> Nabatti. All rights reserved.</p>
     </div>
   </footer>
+  <script>
+    // Mengambil elemen dengan id "current-year"
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
 </body>
 
 </html>
