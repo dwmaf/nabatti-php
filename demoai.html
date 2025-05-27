@@ -115,12 +115,11 @@
     crossorigin="anonymous"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-
   <script>
     // Fungsi untuk memuat model TensorFlow.js
     async function loadModel() {
       // Memuat model TensorFlow.js
-      const model = await tf.loadLayersModel('model/model_v4/model.json');
+      const model = await tf.loadLayersModel('model/model_v4_with_61_percentage_accuracy/model.json');
       console.log("Model loaded successfully!");
 
       // Fungsi untuk memproses dan memprediksi gambar
@@ -154,6 +153,8 @@
         const tensor = tf.browser.fromPixels(img).resizeNearestNeighbor([224, 224]).toFloat().expandDims(0);
         const prediction = await model.predict(tensor).data();
         // Akhir pengukuran waktu
+        console.log(prediction);
+        
         const endTime = performance.now();  // Akhir waktu prediksi
 
         // Hitung waktu yang dibutuhkan untuk prediksi
@@ -168,15 +169,18 @@
     function displayPrediction(prediction) {
       // Daftar label kelas
       const dataset_labels = [
-        'Ripe Apple', 'Ripe Banana', 'Ripe Mango', 'Ripe Orange', 'Ripe Papaya',
-        'Ripe Pomegranate', 'Rotten Apple', 'Rotten Banana', 'Rotten Mango',
-        'Rotten Orange', 'Rotten Papaya', 'Rotten Pomegranate', 'Unripe Apple',
-        'Unripe Banana', 'Unripe Mango', 'Unripe Orange', 'Unripe Papaya',
-        'Unripe Pomegranate'
+        'Ripe Apple', 'Ripe Banana', 'Ripe Dragon', 'Ripe Grape', 'Ripe Lemon',
+        'Ripe Mango', 'Ripe Orange', 'Ripe Papaya', 'Ripe Pineapple',
+        'Ripe Pomegranate', 'Ripe Strawberry', 'Unripe Apple',
+        'Unripe Banana', 'Unripe Dragon', 'Unripe Grapes', 'Unripe Lemon',
+        'Unripe Mango', 'Unripe Orange', 'Unripe Papaya', 'Unripe Pineapple', 'Unripe Pomegranate', 'Unripe Strawberry'
       ];
 
       // Menentukan ID kelas dengan probabilitas tertinggi
       const predicted_id = prediction.indexOf(Math.max(...prediction));
+      console.log(predicted_id);
+      console.log(dataset_labels[17]);
+      
       const predicted_label = dataset_labels[predicted_id];
 
       // Tampilkan prediksi di status card
