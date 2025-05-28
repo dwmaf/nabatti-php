@@ -393,10 +393,17 @@
           </div>
         </div>
       </div>
-
-
     </div>
   </section>
+  <div class="card text-center mx-auto" style="width: 200px; height: 200px; background-color: #b7f6c6;" >
+    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+      <div class="p-3 mb-3 rounded-circle d-flex justify-content-center align-items-center" style="background-color: #28a745;">
+        <i class="fa-solid fa-magnifying-glass text-white fs-1"></i>
+      </div>
+      <h1 class="card-title mb-1 fw-bold" style="font-size: 42px;" id="ai_usage_count">...Memuat</h1>
+      <h6 class="card-subtitle text-muted">FruitscanAi Usage</h6>
+    </div>
+  </div>
   <footer>
     <div
       class="container-fluid text-center d-flex flex-column flex-md-row justify-content-center align-items-center py-3">
@@ -407,6 +414,13 @@
   <script>
     // Mengambil elemen dengan id "current-year"
     document.getElementById('current-year').textContent = new Date().getFullYear();
+    // ambil data dan masukin ke elemen
+    fetch('get_usage_count.php')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('ai_usage_count').innerText = data.usage_count;
+      });
+
   </script>
 </body>
 
